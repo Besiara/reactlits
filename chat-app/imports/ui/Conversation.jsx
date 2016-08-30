@@ -72,7 +72,7 @@ export default class Conversation extends Component {
               <RaisedButton
                 label="Send"
                 primary={true}
-                onClick={this.sendMessage.bind(this)}
+                onClick={()=>this.sendMessage()}
               />
             </div>
           </CardActions>

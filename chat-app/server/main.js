@@ -6,7 +6,8 @@ import { Messages } from '/imports/api/messages.js';
 
 import '/imports/api/server/message_methods.js';
 
-Meteor.startup(function() {
+Meteor.startup(() => {
+
     if (Chats.find().count() !== 0) return;
 
     Messages.remove({});
