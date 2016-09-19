@@ -10,10 +10,10 @@ import { Chats } from '/imports/api/chats.js';
 import { Messages } from '/imports/api/messages.js';
 
 // Helpers
-import { getTime } from '/imports/ui/getTime.js';
+import { getTime } from '/imports/ui/shared/getTime.js';
 
 // Components
-import Message from '/imports/ui/Message.jsx';
+import Message from '/imports/ui/messages/Message.jsx';
 
 export default class Conversation extends Component {
   sendMessage() {
@@ -84,7 +84,8 @@ export default class Conversation extends Component {
      return this.props.messages.map((message) => (
        <Message
          key={message._id}
-         message={message} />
+         message={message}
+         currentUser={this.props.currentUser} />
      ));
   }
 
@@ -93,13 +94,15 @@ export default class Conversation extends Component {
 Conversation.propTypes = {
   chat: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
-export default createContainer(() => {
-  const chatId = FlowRouter.current().params.chatId;
+export default createContainer(({params}) => {
+  const {chatId} = params;
 
   return {
     chat: Chats.findOne(chatId) || {},
     messages: Messages.find({ chatId }).fetch(),
+    currentUser: Meteor.user(),
   };
 }, Conversation);

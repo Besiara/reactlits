@@ -1,15 +1,20 @@
 // Meteor Dependencies and collections
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Tracker } from 'meteor/tracker';
+import { Accounts } from 'meteor/accounts-base';
+import '/imports/startup/accounts-config.js';
+
 import { Meteor } from 'meteor/meteor';
 // React Dependencies
 import React from 'react';
 import { mount } from 'react-mounter';
 
 // App Components
-import Main from '/imports/ui/Main.jsx';
-import Layout from '/imports/ui/Layout.jsx';
-import Conversations from '/imports/ui/Conversations.jsx';
-import Conversation from '/imports/ui/Conversation.jsx';
+import Layout from '/imports/ui/layouts/Layout.jsx';
+import Landing from '/imports/ui/pages/Landing.jsx';
+import Conversations from '/imports/ui/chats/Conversations.jsx';
+import Conversation from '/imports/ui/chats/Conversation.jsx';
+import {getTime} from '/imports/ui/shared/getTime.js';
 
 // Tap Events Hack
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -19,38 +24,46 @@ injectTapEventPlugin();
 FlowRouter.route('/', {
   name: 'root',
   action() {
-    mount(Main, {
-      content: (<Conversations />),
+    mount(Layout, {
+      content: (<Landing />),
     });
   },
 });
 
-FlowRouter.route('/chats', {
-  name: 'chats',
-  action() {
-    mount(Layout, {
-      content: (<Conversations />),
-    });
-  },
-});
 
 const chatRoutes = FlowRouter.group({
   prefix: '/chats',
-  name: 'chat',
-  triggersEnter: [function(context, redirect) {
-    console.log('running group triggers');
-  }]
+  triggersEnter: [() => {
+    if (!Meteor.userId()) FlowRouter.go('root');
+  }],
 });
-
+chatRoutes.route('/', {
+   name: 'chats',
+   action() {
+     mount(Layout, {
+       content: (<Conversations />),
+     });
+   },
+});
 chatRoutes.route('/:chatId', {
   name: 'chat',
-  action() {
+  action(chatId) {
     mount(Layout, {
-      content: (<Conversation />),
+      content: (<Conversations idchat={chatId}/>),
     });
   },
 });
 
+
+// triggers
+
+// Login
+Accounts.onLogin(() => FlowRouter.go('chats'));
+
+// Logout
+Tracker.autorun(() => {
+  if (!Meteor.userId()) FlowRouter.go('root');
+});
 
 Meteor.startup(() => {
     WebFontConfig = {
