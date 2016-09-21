@@ -1,4 +1,4 @@
-import { getTime } from '/imports/ui/shared/getTime.js';
+import {getTime} from '/imports/ui/shared/getTime.js';
 
 import React, { Component, PropTypes } from 'react';
 
@@ -18,6 +18,7 @@ export default class Chat extends Component {
   render() {
     const cardStyles = {
       marginBottom: 10,
+      background: "none"
     };
     const activeCardStyles= {
        marginBottom: 10,

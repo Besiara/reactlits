@@ -94,7 +94,6 @@ export default class Conversation extends Component {
 Conversation.propTypes = {
   chat: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
-  currentUser: PropTypes.object.isRequired,
 };
 
 export default createContainer(({params}) => {

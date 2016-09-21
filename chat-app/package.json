@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "babel-eslint": "^6.1.2",
+    "bcrypt": "^0.8.7",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-import-resolver-meteor": "^0.3.3",

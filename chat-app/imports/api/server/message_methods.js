@@ -19,7 +19,7 @@ Meteor.methods({
             timestamp: new Date(),
             userId: this.userId,
         };
-     const messageId = Messages.insert(Object.assign(message, params));
+        const messageId = Messages.insert(Object.assign(message, params));
 
         Chats.update(message.chatId, { $set: { lastMessage: message } });
 

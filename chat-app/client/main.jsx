@@ -39,9 +39,9 @@ const chatRoutes = FlowRouter.group({
 });
 chatRoutes.route('/', {
    name: 'chats',
-   action() {
+   action(chatId) {
      mount(Layout, {
-       content: (<Conversations />),
+       content: (<Conversations/>),
      });
    },
 });
@@ -49,7 +49,7 @@ chatRoutes.route('/:chatId', {
   name: 'chat',
   action(chatId) {
     mount(Layout, {
-      content: (<Conversations idchat={chatId}/>),
+      content: (<Conversations chatId={chatId}/>),
     });
   },
 });

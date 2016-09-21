@@ -5,6 +5,7 @@ import { Chats } from '/imports/api/chats.js';
 import { Messages } from '/imports/api/messages.js';
 
 import '/imports/api/server/message_methods.js';
+import '/imports/api/server/chat_method.js';
 
 Meteor.startup(() => {
 
