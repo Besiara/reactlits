@@ -11,6 +11,7 @@ Meteor.methods({
         }
         check(chat, {
             name: String,
+            users: Object,
             picture: String,
             lastMessage: Object
         });
@@ -18,4 +19,5 @@ Meteor.methods({
         Chats.update(chat.chatId, { $set: { newChat: chat } });
         return chatId;
     }
+
 });

@@ -12,7 +12,6 @@ Meteor.startup(() => {
     if (Chats.find().count() !== 0) return;
 
     Messages.remove({});
-
     const messages = [{
         text: 'Are you on your way?',
         timestamp: Moment().subtract(1, 'hours').toDate()

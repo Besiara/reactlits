@@ -15,6 +15,7 @@ import Landing from '/imports/ui/pages/Landing.jsx';
 import Conversations from '/imports/ui/chats/Conversations.jsx';
 import Conversation from '/imports/ui/chats/Conversation.jsx';
 import {getTime} from '/imports/ui/shared/getTime.js';
+import UsersList from '/imports/ui/users/UsersList.jsx';
 
 // Tap Events Hack
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -30,6 +31,14 @@ FlowRouter.route('/', {
   },
 });
 
+FlowRouter.route('/users', {
+  name: 'users',
+  action() {
+    mount(Layout, {
+      content: (<UsersList />),
+    });
+  },
+});
 
 const chatRoutes = FlowRouter.group({
   prefix: '/chats',

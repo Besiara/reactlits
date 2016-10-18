@@ -20,18 +20,7 @@ export default class Conversations extends Component {
   deleteChat(chat) {
     Chats.remove(chat._id);
   }
-  addChat() {
-    const time = new Date();
-    Meteor.call('newChat', {
-        name: 'Unknown',
-        picture: 'https://randomuser.me/api/portraits/lego/6.jpg',
-        lastMessage: {
-          text: "No messages till Today",
-          timestamp: time
-        }
-    });
-    this.forceUpdate();
-  }
+
   renderChats() {
     return this.props.chats.map((chat) => (
       <Chat
@@ -51,7 +40,7 @@ export default class Conversations extends Component {
         <div className="cards-container">
           {this.renderChats()}
           <div className="plus">
-            <FloatingActionButton onClick={()=>this.addChat()}>
+            <FloatingActionButton onClick={()=>FlowRouter.go('users')}>
               <ContentAdd />
             </FloatingActionButton>
           </div>
