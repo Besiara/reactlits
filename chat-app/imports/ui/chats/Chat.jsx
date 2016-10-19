@@ -29,12 +29,12 @@ export default class Chat extends Component {
           avatar={this.props.chat.picture}
         />
           <RefreshIndicator
-            percentage={100}
+            percentage={99}
             size={40}
             left={480}
             top={20}
-            status="loading"
-            color="red"
+            status={this.props.chat.status}
+            color="#8BC34A"
           />
         <CardActions>
           <FlatButton

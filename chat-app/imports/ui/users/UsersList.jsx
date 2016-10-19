@@ -28,13 +28,14 @@ export default class UsersList extends Component {
       firtstMessage: "Hey Bro, "
     };
   }
-
   addChat() {
     console.log (Chats.find({}).fetch());
     Meteor.call('newChat', {
         name: this.state.chatTitle,
-        users: {firstUser: Meteor.user(), secondUser: this.state.selectedUser},
+        firstUser: Meteor.user()._id, 
+        secondUser: this.state.selectedUser,
         picture: '',
+        status: 'loading',
         lastMessage: {
           text: this.state.firtstMessage,
           timestamp: new Date()
